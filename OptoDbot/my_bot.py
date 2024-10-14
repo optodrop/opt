@@ -3,6 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackContext
 import asyncio
 import nest_asyncio
+import os
 
 nest_asyncio.apply()
 
@@ -10,8 +11,8 @@ nest_asyncio.apply()
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-import os
-TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')  # Читаємо токен із змінної оточення
+# Читаємо токен із змінної оточення
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
 # Перевірка наявності токена
 if TOKEN is None:
@@ -55,11 +56,12 @@ async def main():
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
-    # Запускаємо вебхук
-    webhook_url = os.getenv('WEBHOOK_URL')  # URL для вебхука
+    # Налаштування вебхука
+    webhook_url = os.getenv('WEBHOOK_URL')  # Ваш URL для вебхука
     await application.bot.set_webhook(webhook_url)
+
     print("Бот працює. Натисни Ctrl+C для зупинки.")
-    await application.run_webhook(listen="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    await application.run_webhook(listen="0.0.0.0", port=int(os.environ.get("PORT", 5000)), url_path='webhook')
 
 # Запуск основної функції
 if __name__ == '__main__':
