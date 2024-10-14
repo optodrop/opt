@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "my_bot.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/webhook",
-      "methods": ["POST"],
-      "dest": "my_bot.py"
-    }
-  ]
-}
-=======
 {
   "version": 2,
   "builds": [
@@ -32,4 +14,3 @@
     }
   ]
 }
->>>>>>> a4209b4 (Оновлено код бота)
