@@ -7,7 +7,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Токен бота
-TOKEN = '7803070983:AAEllC5QE4ZrKtKWa8vAJiCt-wIyVtjGu4c'  # Замініть на свій токен
+TOKEN = ''  # Замініть на свій токен
 
 # Функція, яка запускається при команді /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
