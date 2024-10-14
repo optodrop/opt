@@ -11,19 +11,21 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 import os
-TOKEN = os.getenv('TOKEN')  # Читаємо токен із змінної оточення
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')  # Читаємо токен із змінної оточення
+
+# Перевірка наявності токена
+if TOKEN is None:
+    logger.error("Токен бота не знайдено! Перевірте змінну середовища TELEGRAM_BOT_TOKEN.")
+    exit(1)
 
 # Функція, яка запускається при команді /start
 async def start(update: Update, context: CallbackContext):
     try:
-        # Отримуємо ім'я користувача
         user_first_name = update.effective_user.first_name
 
-        # Надсилаємо фотографію
         await context.bot.send_photo(chat_id=update.effective_chat.id,
                                      photo='https://optodrop.com.ua/image/catalog/blog/blog5.jpg')
 
-        # Створюємо кнопки
         keyboard = [
             [InlineKeyboardButton("Перейти на сайт", url='https://optodrop.com.ua/')],
             [InlineKeyboardButton("Зв'язатися з менеджером", url='https://t.me/ibanan_ua')],
@@ -31,7 +33,6 @@ async def start(update: Update, context: CallbackContext):
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
-        # Текст привітання
         welcome_text = f"""
 👋 {user_first_name}, раді вітати вас у боті OPTODROP!
 
@@ -43,7 +44,6 @@ async def start(update: Update, context: CallbackContext):
 
 👇 Оберіть одну з опцій, щоб продовжити!
 """
-        # Надсилаємо повідомлення
         await context.bot.send_message(chat_id=update.effective_chat.id, text=welcome_text, reply_markup=reply_markup)
 
     except Exception as e:
@@ -60,4 +60,4 @@ async def main():
 
 # Запуск основної функції
 if __name__ == '__main__':
-    asyncio.run(main())  # Використовуємо asyncio.run() для запуску
+    asyncio.run(main())
