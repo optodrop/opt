@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "version": 2,
   "builds": [
@@ -14,3 +15,21 @@
     }
   ]
 }
+=======
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "OptoDbot/my_bot.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/webhook",
+      "methods": ["POST"],
+      "dest": "OptoDbot/my_bot.py"
+    }
+  ]
+}
+>>>>>>> a4209b4 (Оновлено код бота)
