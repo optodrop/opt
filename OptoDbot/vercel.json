@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "OptoDbot/my_bot.py",
+      "src": "my_bot.py",
       "use": "@vercel/python"
     }
   ],
@@ -10,7 +10,7 @@
     {
       "src": "/webhook",
       "methods": ["POST"],
-      "dest": "OptoDbot/my_bot.py"
+      "dest": "my_bot.py"
     }
   ]
 }
