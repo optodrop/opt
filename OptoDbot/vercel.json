@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "my_bot.py",   // Вкажіть правильний шлях до вашого файлу з ботом
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/webhook",
+      "methods": ["POST"],
+      "dest": "my_bot.py"  // Вкажіть той самий файл
+    }
+  ]
+}

@@ -2,9 +2,9 @@ import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackContext
 import asyncio
-import nest_asyncio  # Додаємо цю бібліотеку
+import nest_asyncio
 
-nest_asyncio.apply()  # Додаємо цю строку перед запуском вашого бота
+nest_asyncio.apply()
 
 # Налаштовуємо журналювання
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -55,8 +55,11 @@ async def main():
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
+    # Запускаємо вебхук
+    webhook_url = os.getenv('WEBHOOK_URL')  # URL для вебхука
+    await application.bot.set_webhook(webhook_url)
     print("Бот працює. Натисни Ctrl+C для зупинки.")
-    await application.run_polling()
+    await application.run_webhook(listen="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 # Запуск основної функції
 if __name__ == '__main__':
